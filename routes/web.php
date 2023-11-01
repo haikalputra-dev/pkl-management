@@ -1,9 +1,13 @@
 <?php
 
+<<<<<<< HEAD
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MentorController;
+=======
+use Illuminate\Support\Facades\Route;
+>>>>>>> 66034a7ed665f48dbf765c368ec1449e1afd4618
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +23,7 @@ use App\Http\Controllers\MentorController;
 Route::get('/', function () {
     return view('welcome');
 });
+<<<<<<< HEAD
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -48,3 +53,5 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
 
 
 Route::get('admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+=======
+>>>>>>> 66034a7ed665f48dbf765c368ec1449e1afd4618
