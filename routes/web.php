@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MentorController;
+use App\Http\Middleware\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,13 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
+    //Dashboard Adin
     Route::get('admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
 
     Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+    //data Auth
+    Route::get('admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
+    Route::get('admin/datamaster', [AdminController::class, 'AdminDataMaster'])->name('admin.DataMaster');
 });
 
 

@@ -35,7 +35,7 @@
                 <div class="collapse" id="uiComponents">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="pages/ui-components/accordion.html" class="nav-link">Auth</a>
+                            <a href="{{route('admin.DataMaster')}}" class="nav-link">Auth</a>
                         </li>
                         <li class="nav-item">
                             <a href="pages/ui-components/alerts.html" class="nav-link">Pembimbing</a>

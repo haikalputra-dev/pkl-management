@@ -40,7 +40,7 @@ class UsersTableSeeder extends Seeder
             //user
             [
                 'name' => 'User',
-                'username' => 'admin',
+                'username' => 'user',
                 'email' => 'user@ggamil.com',
                 'password' => Hash::make(123),
                 'role' => 'user',
