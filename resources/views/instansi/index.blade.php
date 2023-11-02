@@ -1,5 +1,5 @@
-@extends('mentor.mentor_dashboard')
-@section('Mentor')
+@extends('instansi.instansi_dashboard')
+@section('instansi')
 <div class="page-content">
 
     <nav class="page-breadcrumb">
