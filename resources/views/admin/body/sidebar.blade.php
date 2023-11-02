@@ -29,16 +29,28 @@
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false" aria-controls="uiComponents">
                     <i class="link-icon" data-feather="feather"></i>
-                    <span class="link-title">UI Kit</span>
+                    <span class="link-title">Data Master</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="uiComponents">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="pages/ui-components/accordion.html" class="nav-link">Accordion</a>
+                            <a href="pages/ui-components/accordion.html" class="nav-link">Auth</a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/ui-components/alerts.html" class="nav-link">Alerts</a>
+                            <a href="pages/ui-components/alerts.html" class="nav-link">Pembimbing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/ui-components/alerts.html" class="nav-link">Staff</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/ui-components/alerts.html" class="nav-link">Siswa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/ui-components/alerts.html" class="nav-link">Instansi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/ui-components/alerts.html" class="nav-link">Tim</a>
                         </li>
                     </ul>
                 </div>
