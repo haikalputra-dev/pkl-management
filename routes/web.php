@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-
+//admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
     //Dashboard Admin
     Route::get('admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
@@ -51,21 +51,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:mentor'])->group(function () {
 
     Route::get('mentor/dashboard', [MentorController::class, 'MentorDashboard'])->name('mentor.dashboard');
-    // Route::get('mentor/logout', [MentorController::class, 'MentorLogout'])->name('Mentor.logout');
-    Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+    Route::get('mentor/logout', [MentorController::class, 'MentorLogout'])->name('Mentor.logout');
 });
 
 //staff
 Route::middleware(['auth', 'role:staff'])->group(function () {
 
     Route::get('staff/dashboard', [StaffController::class, 'StaffDashboard'])->name('staff.dashboard');
-    // Route::get('/logout', [StaffController::class, 'UserLogout'])->name('User.logout');
+    Route::get('staff/logout', [StaffController::class, 'StaffLogout'])->name('staff.logout');
 });
 
 //instansi
 Route::middleware(['auth', 'role:instansi'])->group(function () {
 
-    Route::get('Instansi/dashboard', [InstansiController::class, 'InstansiDashboard'])->name('instansi.dashboard');
-    // Route::get('mentor/logout', [MentorController::class, 'MentorLogout'])->name('Mentor.logout');
+    Route::get('instansi/dashboard', [InstansiController::class, 'InstansiDashboard'])->name('instansi.dashboard');
+    Route::get('instansi/logout', [InstansiController::class, 'InstansiLogout'])->name('instansi.logout');
     // Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 });
