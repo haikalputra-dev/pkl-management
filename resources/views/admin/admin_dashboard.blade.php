@@ -23,6 +23,8 @@
 
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('../assets/vendors/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/vendors/datatables.net-bs5/dataTables.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/vendors/sweetalert2/sweetalert2.min.css') }}">
     <!-- End plugin css for this page -->
 
     <!-- inject:css -->
@@ -66,6 +68,9 @@
     <!-- Plugin js for this page -->
     <script src="{{asset('../assets/vendors/flatpickr/flatpickr.min.js')}}"></script>
     <script src="{{asset('../assets/vendors/apexcharts/apexcharts.min.js')}}"></script>
+    <script src="{{asset('../assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+    <script src="{{asset('../assets/vendors/datatables.net-bs5/dataTables.bootstrap5.js') }}"></script>
+    <script src="{{asset('../assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
     <!-- End plugin js for this page -->
 
     <!-- inject:js -->
@@ -75,7 +80,9 @@
 
     <!-- Custom js for this page -->
     <script src="{{asset('../assets/js/dashboard-dark.js')}}"></script>
-    <!-- End custom js for this page -->
+    <script src="{{asset('../assets/js/data-table.js') }}"></script>
+    <script src="{{asset('../assets/js/sweet-alert.js')}}"></script>
+    <!-- End custom js for t    his page -->
 
 </body>
 

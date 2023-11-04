@@ -48,3 +48,8 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
 
 
 Route::get('admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+
+
+Route::get('admin/instansi', [AdminController::class, 'AdminInstansi'])->name('admin.instansi');
+Route::post('admin/instansi', [AdminController::class, 'insertInstansi'])->name('insertInstansi');
+Route::delete('admin/instansi/{id}', [AdminController::class,'destroyInstansi'])->name('deleteInstansi');

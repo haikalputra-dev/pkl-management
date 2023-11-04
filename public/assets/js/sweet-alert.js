@@ -61,7 +61,7 @@ $(function() {
       })
       
       swalWithBootstrapButtons.fire({
-        title: 'Are you sure?',
+        title: 'Yakin Hapus?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
@@ -138,7 +138,7 @@ $(function() {
         icon: 'success',
         title: 'Signed in successfully'
       })
-    }
+    } 
   }
 
 });

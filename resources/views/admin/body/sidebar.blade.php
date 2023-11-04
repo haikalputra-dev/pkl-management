@@ -47,7 +47,7 @@
                             <a href="pages/ui-components/alerts.html" class="nav-link">Siswa</a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/ui-components/alerts.html" class="nav-link">Instansi</a>
+                            <a href="{{ route('admin.instansi') }}" class="nav-link">Instansi</a>
                         </li>
                         <li class="nav-item">
                             <a href="pages/ui-components/alerts.html" class="nav-link">Tim</a>
