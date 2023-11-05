@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class MentorController extends Controller
+class UserController extends Controller
 {
-    public function MentorDashboard()
+    public function UserDashboard()
     {
-        return view('mentor.index');
+        return view('dashboard');
     }
-
-    public function MentorLogout(Request $request)
+    public function UserLogout(Request $request)
     {
         Auth::guard('web')->logout();
 

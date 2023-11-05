@@ -36,6 +36,10 @@ class AuthenticatedSessionController extends Controller
             $url = 'mentor/dashboard';
         } elseif ($request->user()->role === 'user') {
             $url = 'dashboard';
+        } elseif ($request->user()->role === 'instansi') {
+            $url = 'instansi/dashboard';
+        } elseif ($request->user()->role === 'staff') {
+            $url = 'staff/dashboard';
         }
         return redirect()->intended($url);
     }

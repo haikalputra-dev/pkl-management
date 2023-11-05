@@ -4,6 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MentorController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\InstansiController;
+use App\Http\Middleware\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,25 +34,52 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-
+//admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
+    //Dashboard Admin
     Route::get('admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
 
     Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+    //data Auth
+    Route::get('admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
+    Route::get('admin/datamaster', [AdminController::class, 'AdminDataMaster'])->name('admin.DataMaster');
 });
 
 
 
-
+//mentor
 Route::middleware(['auth', 'role:mentor'])->group(function () {
 
     Route::get('mentor/dashboard', [MentorController::class, 'MentorDashboard'])->name('mentor.dashboard');
+    Route::get('mentor/logout', [MentorController::class, 'MentorLogout'])->name('Mentor.logout');
 });
 
+//staff
+Route::middleware(['auth', 'role:staff'])->group(function () {
 
 Route::get('admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 
 
+
+    Route::get('staff/dashboard', [StaffController::class, 'StaffDashboard'])->name('staff.dashboard');
+    Route::get('staff/logout', [StaffController::class, 'StaffLogout'])->name('staff.logout');
+});
+
+
 Route::get('admin/instansi', [AdminController::class, 'AdminInstansi'])->name('admin.instansi');
+Route::get('admin/instansi/{id}', [AdminController::class, 'editInstansi'])->name('admin.editInstansi');
+Route::post('admin/instansi/{id}',[AdminController::class, 'updateInstansi'])->name('admin.updateInstansi');
 Route::post('admin/instansi', [AdminController::class, 'insertInstansi'])->name('insertInstansi');
 Route::delete('admin/instansi/{id}', [AdminController::class,'destroyInstansi'])->name('deleteInstansi');
+
+
+//instansi
+Route::middleware(['auth', 'role:instansi'])->group(function () {
+
+    Route::get('instansi/dashboard', [InstansiController::class, 'InstansiDashboard'])->name('instansi.dashboard');
+    Route::get('instansi/logout', [InstansiController::class, 'InstansiLogout'])->name('instansi.logout');
+    // Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+});
+
+
+

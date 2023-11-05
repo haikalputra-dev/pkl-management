@@ -41,19 +41,19 @@
     <div class="main-wrapper">
 
         <!-- partial:partials/_sidebar.html -->
-        @include('mentor.body.sidebar')
+        @include('staff.body.sidebar')
         <!-- partial -->
 
         <div class="page-wrapper">
 
             <!-- partial:partials/_navbar.html -->
-            @include('mentor.body.header')
+            @include('staff.body.header')
             <!-- partial -->
 
-            @yield('Mentor')
+            @yield('staff')
 
             <!-- partial:partials/_footer.html -->
-            @include('mentor.body.footer')
+            @include('staff.body.footer')
             <!-- partial -->
 
         </div>

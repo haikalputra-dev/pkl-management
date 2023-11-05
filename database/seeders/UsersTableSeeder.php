@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Http\Middleware\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            // admin
+            //admin
             [
                 'name' => 'Admin',
                 'username' => 'admin',
@@ -26,7 +27,7 @@ class UsersTableSeeder extends Seeder
 
             ],
 
-            //mentor
+            // //mentor
             [
                 'name' => 'Mentor',
                 'username' => 'mentor',
@@ -37,16 +38,34 @@ class UsersTableSeeder extends Seeder
 
             ],
 
-            //user
+            // //user
             [
                 'name' => 'User',
-                'username' => 'admin',
+                'username' => 'user',
                 'email' => 'user@ggamil.com',
                 'password' => Hash::make(123),
                 'role' => 'user',
                 'status' => 'aktif',
 
             ],
+            //instansi
+            [
+                'name' => 'instansi',
+                'username' => 'instansi',
+                'email' => 'instansi@gmail.com',
+                'password' => Hash::make(123),
+                'role' => 'instansi',
+                'status' => 'aktif'
+            ],
+            //staff
+            [
+                'name' => 'Staff',
+                'username' => 'staff',
+                'email' => 'staff@gmail.com',
+                'password' => Hash::make(123),
+                'role' => 'staff',
+                'status' => 'aktif'
+            ]
 
 
 

@@ -1,5 +1,5 @@
-@extends('admin.admin_dashboard')
-@section('admin')
+  @extends('admin.admin_dashboard')
+  @section('admin')
 <div class="page-content">
 
   <nav class="page-breadcrumb">
@@ -38,13 +38,18 @@
                   <td>{{ $i->email }}</td>
                   <td>{{ $i->nama_instansi }}</td>
                   <td>
+                    <form action="{{ route('deleteInstansi',$i->id) }}" method="POST">
+                      @csrf
+                      @method('delete')
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                      <button type="button" class="btn btn-warning btn-icon"><i class="btn-icon-prepend" data-feather="edit"></i></button>
+                      <button type="button" class="btn btn-warning btn-icon user_edit"><a href="{{ route('admin.editInstansi', $i->id) }}" style="color: black"><i class="btn-icon-prepend" data-feather="edit"></a></i></button>
                       <button type="submit" class="btn btn-danger btn-icon"><i class="btn-icon-prepend" data-feather="trash-2"></i></button>
                     </div>
-                    <button class="btn btn-primary" onclick="showSwal('delete-confirm')">Click here!</button>
+
+                    
+                    {{-- <button class="btn btn-primary" onclick="showSwal('delete-confirm')">Click here!</button> --}}
                   <!-- Small modal -->
-                      <button type="button" class="btn btn-danger btn-icon" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $i->id }}"><i class="btn-icon-prepend" data-feather="trash-2"></i></button>
+                      {{-- <button type="button" class="btn btn-danger btn-icon" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $i->id }}"><i class="btn-icon-prepend" data-feather="trash-2"></i></button>
       <form action="{{ route('deleteInstansi',$i->id) }}" method="POST">
         @csrf
         @method('delete')
@@ -65,7 +70,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
       </form>
                   </td>
                 </tr>

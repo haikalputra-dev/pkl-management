@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class MentorController extends Controller
-{
-    public function MentorDashboard()
-    {
-        return view('mentor.index');
-    }
+use Illuminate\Http\Request;
 
-    public function MentorLogout(Request $request)
+class InstansiController extends Controller
+{
+    public function InstansiDashboard()
+    {
+        return view('instansi.index');
+    }
+    public function instansiLogout(Request $request)
     {
         Auth::guard('web')->logout();
 
