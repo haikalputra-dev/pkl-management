@@ -13,7 +13,7 @@
         <ul class="nav">
             <li class="nav-item nav-category">Main</li>
             <li class="nav-item">
-                <a href="{{route('mentor.dashboard')}}" class="nav-link">
+                <a href="{{route('user.dashboard')}}" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
                     <span class="link-title">Dashboard</span>
                 </a>
@@ -28,10 +28,10 @@
                 <div class="collapse" id="advancedUI">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{route('mentor.absensi')}}" class="nav-link">Absensi</a>
+                            <a href="pages/advanced-ui/cropper.html" class="nav-link">Absensi</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('mentor.jurnal')}}" class="nav-link">Jurnal</a>
+                            <a href="pages/advanced-ui/owl-carousel.html" class="nav-link">Jurnal</a>
                         </li>
                     </ul>
                 </div>

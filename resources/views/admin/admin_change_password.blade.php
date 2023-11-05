@@ -55,42 +55,41 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h6 class="card-title">Update profile</h6>
+                        <h6 class="card-title">Change Password</h6>
 
-                        <form method="POST" action="{{route('admin.profile.store')}}" class="forms-sample" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('admin.update.password')}}" class="forms-sample" enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3">
-                                <label for="exampleInputUsername1" class="form-label">Username</label>
-                                <input type="text" name="username" class="form-control" id="exampleInputUsername1" autocomplete="off" value="{{$profileData->username}}">
+                                <label for="exampleInputUsername1" class="form-label">old password</label>
+                                <input type="password" name="Old_password" class="form-control @error('Old_password') is-invalid @enderror" id="Old_password" autocomplete="off" value="{{$profileData->username}}">
+                                @error('Old_password')
+                                <span class="text-danger">{{ massage}}</span>
+
+                                @enderror
                             </div>
+
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Nama</label>
-                                <input type="text" name="name" class="form-control" id="exampleInputUsername1" autocomplete="off" value="{{$profileData->name}}">
+                                <label for="exampleInputUsername1" class="form-label">new password</label>
+                                <input type="password" name="New_password" class="form-control @error('new_password') is-invalid @enderror" id="new_password" autocomplete="off">
+                                @error('new_password')
+                                <span class="text-danger">{{ massage}}</span>
+
+                                @enderror
                             </div>
+
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control" id="exampleInputUsername1" autocomplete="off" value="{{$profileData->email}}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Phone</label>
-                                <input type="text" name="phone" class="form-control" id="exampleInputUsername1" autocomplete="off" value="{{$profileData->phone}}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Address</label>
-                                <input type="text" name="address" class="form-control" id="exampleInputUsername1" autocomplete="off" value="{{$profileData->address}}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">photo</label>
-                                <input class="form-control" name="photo" type="file" id="image">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label"> </label>
-                                <img id="showImage" class="wd-70 rounded-circle" src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo ): url('upload/no_image.jpg' ) }}" alt="profile">
+                                <label for="exampleInputUsername1" class="form-label">Confrim new password</label>
+                                <input type="password" name="confirm_new_password" class="form-control" id="confirm_new_password" autocomplete="off">
+                                @error('confirm_new_password')
+                                <span class="text-danger">{{ $massage}}</span>
+
+                                @enderror
                             </div>
 
 
-                            <button type="submit" class="btn btn-primary me-2">Simpan Perubahan</button>
+
+                            <button type="submit" class="btn btn-primary me-2">save change</button>
 
                         </form>
 
@@ -109,17 +108,8 @@
 
 </div>
 
-<script>
-    $(document).ready(function() {
-        $('#image').change(function(e) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#showImage').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        });
-    });
-</script>
+
+
 
 
 

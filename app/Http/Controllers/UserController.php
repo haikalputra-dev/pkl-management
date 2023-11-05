@@ -7,18 +7,20 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    //
     public function UserDashboard()
     {
-        return view('dashboard');
+        return view('user.index');
     }
     public function UserLogout(Request $request)
-    {
-        Auth::guard('web')->logout();
+    { {
+            Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
+            $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+            $request->session()->regenerateToken();
 
-        return redirect('/');
+            return redirect('/');
+        }
     }
 }

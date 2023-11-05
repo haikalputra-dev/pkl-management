@@ -23,8 +23,6 @@
 
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('../assets/vendors/flatpickr/flatpickr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('../assets/vendors/datatables.net-bs5/dataTables.bootstrap5.css') }}">
-    <link rel="stylesheet" href="{{ asset('../assets/vendors/sweetalert2/sweetalert2.min.css') }}">
     <!-- End plugin css for this page -->
 
     <!-- inject:css -->
@@ -37,27 +35,25 @@
     <!-- End layout styles -->
 
     <link rel="shortcut icon" href="{{ asset('../assets/images/favicon.png') }}" />
-
-    <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"> -->
 </head>
 
 <body>
     <div class="main-wrapper">
 
         <!-- partial:partials/_sidebar.html -->
-        @include('admin.body.sidebar')
+        @include('user.body.sidebar')
         <!-- partial -->
 
         <div class="page-wrapper">
 
             <!-- partial:partials/_navbar.html -->
-            @include('admin.body.header')
+            @include('user.body.header')
             <!-- partial -->
 
-            @yield('admin')
+            @yield('user')
 
             <!-- partial:partials/_footer.html -->
-            @include('admin.body.footer')
+            @include('user.body.footer')
             <!-- partial -->
 
         </div>
@@ -70,9 +66,6 @@
     <!-- Plugin js for this page -->
     <script src="{{asset('../assets/vendors/flatpickr/flatpickr.min.js')}}"></script>
     <script src="{{asset('../assets/vendors/apexcharts/apexcharts.min.js')}}"></script>
-    <script src="{{asset('../assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
-    <script src="{{asset('../assets/vendors/datatables.net-bs5/dataTables.bootstrap5.js') }}"></script>
-    <script src="{{asset('../assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
     <!-- End plugin js for this page -->
 
     <!-- inject:js -->
@@ -82,37 +75,8 @@
 
     <!-- Custom js for this page -->
     <script src="{{asset('../assets/js/dashboard-dark.js')}}"></script>
-<<<<<<< HEAD
-    <script src="{{asset('../assets/js/data-table.js') }}"></script>
-    <script src="{{asset('../assets/js/sweet-alert.js')}}"></script>
-    <!-- End custom js for t    his page -->
-=======
     <!-- End custom js for this page -->
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
->>>>>>> f09dccf6928e9274a0b90e225b2b7c01749af4f0
 
-    <script>
-        @if(Session::has('message'))
-        var type = "{{ Session::get('alert-type','info') }}"
-        switch (type) {
-            case 'info':
-                toastr.info(" {{ Session::get('message') }} ");
-                break;
-
-            case 'success':
-                toastr.success(" {{ Session::get('message') }} ");
-                break;
-
-            case 'warning':
-                toastr.warning(" {{ Session::get('message') }} ");
-                break;
-
-            case 'error':
-                toastr.error(" {{ Session::get('message') }} ");
-                break;
-        }
-        @endif
-    </script> -->
 </body>
 
 </html>
