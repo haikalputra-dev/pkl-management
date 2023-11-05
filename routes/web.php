@@ -48,6 +48,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('admin.update.password');
 
     Route::get('admin/datamaster', [AdminController::class, 'AdminDataMaster'])->name('admin.DataMaster');
+    Route::get('admin/create/data', [AdminController::class, 'AdminCreateData'])->name('admin.create.data');
+    Route::post('admin/data/store', [AdminController::class, 'AdminDataStore'])->name('admin.data.store');
+    Route::get('admin/edit/data', [AdminController::class, 'AdminEditData'])->name('admin.edit.data');
+    Route::delete('admin/data/delete', [AdminController::class, 'AdminDeleteUser'])->name('admin.delete.user');
 });
 
 
@@ -67,7 +71,7 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
 //staff
 Route::middleware(['auth', 'role:staff'])->group(function () {
 
-Route::get('admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+    Route::get('admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 
 
 
@@ -78,9 +82,9 @@ Route::get('admin/login', [AdminController::class, 'AdminLogin'])->name('admin.l
 
 Route::get('admin/instansi', [AdminController::class, 'AdminInstansi'])->name('admin.instansi');
 Route::get('admin/instansi/{id}', [AdminController::class, 'editInstansi'])->name('admin.editInstansi');
-Route::post('admin/instansi/{id}',[AdminController::class, 'updateInstansi'])->name('admin.updateInstansi');
+Route::post('admin/instansi/{id}', [AdminController::class, 'updateInstansi'])->name('admin.updateInstansi');
 Route::post('admin/instansi', [AdminController::class, 'insertInstansi'])->name('insertInstansi');
-Route::delete('admin/instansi/{id}', [AdminController::class,'destroyInstansi'])->name('deleteInstansi');
+Route::delete('admin/instansi/{id}', [AdminController::class, 'destroyInstansi'])->name('deleteInstansi');
 
 
 //instansi
@@ -90,6 +94,3 @@ Route::middleware(['auth', 'role:instansi'])->group(function () {
     Route::get('instansi/logout', [InstansiController::class, 'InstansiLogout'])->name('instansi.logout');
     // Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 });
-
-
-
