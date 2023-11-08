@@ -73,7 +73,7 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
 //staff
 Route::middleware(['auth', 'role:staff'])->group(function () {
 
-Route::get('admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+    Route::get('admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 
 
 
@@ -91,6 +91,3 @@ Route::middleware(['auth', 'role:instansi'])->group(function () {
     Route::get('instansi/logout', [InstansiController::class, 'InstansiLogout'])->name('instansi.logout');
     // Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 });
-
-
-
