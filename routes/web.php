@@ -48,6 +48,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('admin.update.password');
 
     Route::get('admin/datamaster', [AdminController::class, 'AdminDataMaster'])->name('admin.DataMaster');
+    Route::get('admin/instansi', [AdminController::class, 'AdminInstansi'])->name('admin.instansi');
+    Route::get('admin/instansi/{id}', [AdminController::class, 'editInstansi'])->name('admin.editInstansi');
+    Route::post('admin/instansi/{id}',[AdminController::class, 'updateInstansi'])->name('admin.updateInstansi');
+    Route::post('admin/instansi', [AdminController::class, 'insertInstansi'])->name('insertInstansi');
+    Route::delete('admin/instansi/{id}', [AdminController::class,'destroyInstansi'])->name('deleteInstansi');
+
 });
 
 
@@ -76,11 +82,6 @@ Route::get('admin/login', [AdminController::class, 'AdminLogin'])->name('admin.l
 });
 
 
-Route::get('admin/instansi', [AdminController::class, 'AdminInstansi'])->name('admin.instansi');
-Route::get('admin/instansi/{id}', [AdminController::class, 'editInstansi'])->name('admin.editInstansi');
-Route::post('admin/instansi/{id}',[AdminController::class, 'updateInstansi'])->name('admin.updateInstansi');
-Route::post('admin/instansi', [AdminController::class, 'insertInstansi'])->name('insertInstansi');
-Route::delete('admin/instansi/{id}', [AdminController::class,'destroyInstansi'])->name('deleteInstansi');
 
 
 //instansi
