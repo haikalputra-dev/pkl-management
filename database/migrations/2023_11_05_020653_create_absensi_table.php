@@ -15,12 +15,10 @@ return new class extends Migration
         Schema::create('absensi', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->enum('keterangan', ['Masuk', 'Alpha', 'Telat', 'Sakit',]);
+            $table->enum('keterangan', ['Masuk', 'Alpa', 'Telat', 'Sakit',]);
             $table->date('tanggal');
             $table->time('jam_masuk')->nullable();
             $table->time('jam_keluar')->nullable();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

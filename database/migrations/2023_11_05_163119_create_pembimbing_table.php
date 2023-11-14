@@ -17,6 +17,9 @@ return new class extends Migration
             $table->integer('id_instansi');
             $table->string('nama_pembimbing',50);
             $table->date('tgl_lahir');
+            $table->string('alamat',50);
+            $table->enum('jenis_kelamin',['pria','wanita']);
+            $table->string('agama',50);
             $table->string('email',50);
             $table->string('no_telp',20);
         });

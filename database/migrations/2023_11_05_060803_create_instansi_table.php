@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->integer('id_auth');
             $table->string('nama_instansi',50);
+            $table->string('npsn',15);
+            $table->enum('jenis_sekolah',['negeri','swasta'])->default('negeri');
+            $table->string('alamat',100);
+            $table->string('telepon',15);
+            $table->string('email',15);
         });
     }
 

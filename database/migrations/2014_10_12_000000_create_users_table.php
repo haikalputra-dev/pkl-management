@@ -11,20 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('auth', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('username')->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('photo')->nullable();
-            $table->string('phone')->nullable();
-            $table->text('address')->nullable();
-            $table->enum('role', ['admin', 'mentor', 'user', 'staff', 'instansi'])->default('user');
+            $table->string('name',50);
+            $table->string('username',50)->nullable();
+            $table->string('email',50)->unique();
+            $table->string('password',50);
+            $table->enum('role', ['admin', 'mentor', 'siswa', 'staff', 'instansi'])->default('siswa');
             $table->enum('status', ['aktif', 'inaktif'])->default('aktif');
-            $table->rememberToken();
-            $table->timestamps();
         });
     }
 

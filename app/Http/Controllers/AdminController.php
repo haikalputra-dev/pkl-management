@@ -103,7 +103,7 @@ class AdminController extends Controller
     }
     public function AdminCreateData()
     {
-
+        
         return view(('admin.datamaster.create'),);
     }
     public function AdminDataStore(Request $request)

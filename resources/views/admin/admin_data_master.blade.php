@@ -20,63 +20,41 @@
           Tambah Data
         </button>
         <div class="table-responsive">
-          <table id="dataTableExample" class="table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Nama Instansi</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($instansis as $i)  
-              <tr>
-                <td>{{ $i->id }}</td>
-                <td>{{ $i->username }}</td>
-                <td>{{ $i->email }}</td>
-                <td>{{ $i->nama_instansi }}</td>
-                <td>
-                  <form action="{{ route('deleteInstansi',$i->id) }}" method="POST">
-                    @csrf
-                    @method('delete')
-                  <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-warning btn-icon user_edit"><a href="{{ route('admin.editInstansi', $i->id) }}" style="color: black"><i class="btn-icon-prepend" data-feather="edit"></a></i></button>
-                    <button type="submit" class="btn btn-danger btn-icon"><i class="btn-icon-prepend" data-feather="trash-2"></i></button>
-                  </div>
-
-                  
-                  {{-- <button class="btn btn-primary" onclick="showSwal('delete-confirm')">Click here!</button> --}}
-                <!-- Small modal -->
-                    {{-- <button type="button" class="btn btn-danger btn-icon" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $i->id }}"><i class="btn-icon-prepend" data-feather="trash-2"></i></button>
-    <form action="{{ route('deleteInstansi',$i->id) }}" method="POST">
-      @csrf
-      @method('delete')
-      <!-- Modal -->
-      <div class="modal fade" id="deleteModal{{ $i->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
-            </div>
-            <div class="modal-body">
-              {{ $i->id }}
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div> --}}
-    </form>
-                </td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
+            <table id="dataTableExample" class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Address</th>
+                    <th>phone</th>
+                    <th>Role</th>
+                    <th>status</th>
+                    <th>Aksi</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($users as $i)
+                <tr>
+                    <td>{{$i->name}}</td>
+                    <td>{{$i->username}}</td>
+                    <td>{{$i->address}}</td>
+                    <td>{{$i->phone}}</td>
+                    <td>{{$i->role}}</td>
+                    <td>{{$i->status}}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-icon user_edit"><a href="{{route('admin.edit.data')}}" style="color: black"><i class="btn-icon-prepend" data-feather="edit"></a></i></button>
+                        <form action="{{route('admin.delete.user'),$i->id}}" method="delete">
+              
+                            @csrf
+              
+                            <button type="submit" class="btn btn-danger btn-icon"><i class="btn-icon-prepend" data-feather="trash-2"></i></button>
+              
+                        </form>
+                    </td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
         </div>
       </div>
     </div>
@@ -85,51 +63,6 @@
 
 </div>
 
-{{-- <script>
-  $(function() {
-
-showSwal = function(type) {
-}
-'use strict';
-    if (type === 'delete-confirm') {
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger me-2'
-        },
-        buttonsStyling: false,
-      })
-      
-      swalWithBootstrapButtons.fire({
-        title: 'Yakin Hapus?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonClass: 'me-2',
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        reverseButtons: true
-      }).then((result) => {
-        if (result.value) {
-          swalWithBootstrapButtons.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
-        } else if (
-          // Read more about handling dismissals
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            'Cancelled',
-            'Your imaginary file is safe :)',
-            'error'
-          )
-        }
-      })
-    }
-});
-</script> --}}
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -169,3 +102,50 @@ showSwal = function(type) {
 </form>
 </div>
 </div>
+
+{{-- <script>
+$(function() {
+
+showSwal = function(type) {
+}
+'use strict';
+  if (type === 'delete-confirm') {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger me-2'
+      },
+      buttonsStyling: false,
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Yakin Hapus?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonClass: 'me-2',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      } else if (
+        // Read more about handling dismissals
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
+    })
+  }
+});
+</script> --}}
+@endsection
