@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('instansi', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_auth');
+            $table->integer('id_auth')->nullable();
             $table->string('nama_instansi',50);
             $table->string('npsn',15);
             $table->enum('jenis_sekolah',['negeri','swasta'])->default('negeri');
             $table->string('alamat',100);
-            $table->string('telepon',15);
-            $table->string('email',15);
+            $table->string('telepon',20);
+            $table->string('email',50);
         });
     }
 

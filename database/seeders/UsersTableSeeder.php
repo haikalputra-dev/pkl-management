@@ -8,19 +8,19 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class AuthTableSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('auth')->insert([
+        DB::table('users')->insert([
             //admin
             [
                 'name' => 'Admin',
                 'username' => 'admin',
-                'email' => 'admin@gamil.com',
+                'email' => 'admin@gmail.cxom',
                 'password' => Hash::make(123),
                 'role' => 'admin',
                 'status' => 'aktif',
@@ -44,7 +44,7 @@ class AuthTableSeeder extends Seeder
                 'username' => 'user',
                 'email' => 'user@ggamil.com',
                 'password' => Hash::make(123),
-                'role' => 'user',
+                'role' => 'siswa',
                 'status' => 'aktif',
 
             ],
@@ -66,9 +66,6 @@ class AuthTableSeeder extends Seeder
                 'role' => 'staff',
                 'status' => 'aktif'
             ]
-
-
-
         ]);
     }
 }

@@ -19,9 +19,10 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'username' => fake()->username(),
             'email' => fake()->unique()->safeEmail(),
             'password' => bcrypt('123'), // password
-            'role' => fake()->randomElement(['admin', 'mentor', 'user', 'staff', 'instansi']),
+            'role' => fake()->randomElement(['admin', 'mentor', 'siswa', 'staff', 'instansi']),
             'status' => fake()->randomElement(['aktif', 'inaktif'])
         ];
     }

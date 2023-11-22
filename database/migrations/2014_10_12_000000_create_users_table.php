@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('auth', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name',50);
             $table->string('username',50)->nullable();
             $table->string('email',50)->unique();
-            $table->string('password',50);
-            $table->enum('role', ['admin', 'mentor', 'siswa', 'staff', 'instansi'])->default('siswa');
+            $table->string('password',150);
+            $table->enum('role', ['admin', 'mentor', 'siswa', 'staff', 'instansi']);
             $table->enum('status', ['aktif', 'inaktif'])->default('aktif');
         });
     }

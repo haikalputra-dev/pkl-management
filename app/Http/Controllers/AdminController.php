@@ -126,7 +126,7 @@ class AdminController extends Controller
     public function AdminInstansi()
     {
         $instansis = DB::table('instansi')
-            ->join('users', 'users.id', 'instansi.id_user')
+            ->join('users', 'users.id', 'instansi.id_auth')
             ->select('instansi.id', 'users.username', 'users.email', 'instansi.nama_instansi')->get();
 
         return view('admin.data_master.instansi_master', compact('instansis'));

@@ -17,7 +17,12 @@ class InstansiFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama_instansi' => fake()->name(),
+            'npsn' => fake()->randomDigit(12),
+            'jenis_sekolah' => fake()->randomElement(['negeri','swasta']),
+            'alamat' => fake()->address(),
+            'telepon' => fake()->phoneNumber(10),
+            'email' => fake()->unique()->safeEmail(),
         ];
     }
 }

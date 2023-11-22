@@ -7,6 +7,7 @@ use App\Http\Controllers\MentorController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\InstansiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MailController;
 
 
 /*
@@ -24,6 +25,7 @@ Route::get('/', function () {
     return view('front/main');
 });
 
+Route::get('send-mail',[MailController::class,'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
