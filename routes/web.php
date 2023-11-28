@@ -25,7 +25,11 @@ Route::get('/', function () {
     return view('front/main');
 });
 
-Route::get('send-mail',[MailController::class,'index']);
+
+
+Route::get('send-mail', [MailController::class, 'index']);
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -56,10 +60,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/datamaster', [AdminController::class, 'AdminDataMaster'])->name('admin.DataMaster');
     Route::get('admin/instansi', [AdminController::class, 'AdminInstansi'])->name('admin.instansi');
     Route::get('admin/instansi/{id}', [AdminController::class, 'editInstansi'])->name('admin.editInstansi');
-    Route::post('admin/instansi/{id}',[AdminController::class, 'updateInstansi'])->name('admin.updateInstansi');
+    Route::post('admin/instansi/{id}', [AdminController::class, 'updateInstansi'])->name('admin.updateInstansi');
     Route::post('admin/instansi', [AdminController::class, 'insertInstansi'])->name('insertInstansi');
-    Route::delete('admin/instansi/{id}', [AdminController::class,'destroyInstansi'])->name('deleteInstansi');
-
+    Route::delete('admin/instansi/{id}', [AdminController::class, 'destroyInstansi'])->name('deleteInstansi');
 });
 
 
@@ -94,4 +97,11 @@ Route::middleware(['auth', 'role:instansi'])->group(function () {
     Route::get('instansi/dashboard', [InstansiController::class, 'InstansiDashboard'])->name('instansi.dashboard');
     Route::get('instansi/logout', [InstansiController::class, 'InstansiLogout'])->name('instansi.logout');
     // Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+});
+
+Route::middleware(['auth', 'role:siswa'])->group(function () {
+
+    Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard');
+    Route::post('webcam', [WebcamController::class, 'store'])->name('webcam.capture');
+    Route::get('user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
 });

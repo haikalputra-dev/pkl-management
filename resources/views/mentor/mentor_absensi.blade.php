@@ -18,14 +18,48 @@
                 <span class="input-group-text input-group-addon bg-transparent border-primary" data-toggle><i data-feather="calendar" class="text-primary"></i></span>
                 <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date" data-input>
             </div>
-            <a href="{{route('mentor.create.absensi')}}"><button type="button" class="btn btn-primary btn-icon-text mb-2 me-2 mb-md-0">
-                    <i class="btn-icon-prepend" data-feather="download-cloud"></i>
-                    Create Absens
-                </button></a>
-            <button type="button" class="btn btn-outline-primary btn-icon-text me-2 mb-2 mb-md-0">
-                <i class="btn-icon-prepend" data-feather="printer"></i>
-                Print
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Buat Absensi
             </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Buat Absensi</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="exampleInputUsername1" class="form-label">Nama Absensi</label>
+                                <input type="text" name="username" class="form-control" id="exampleInputUsername1" autocomplete="off" value="">
+                            </div>
+
+                            <div class="col">
+                                <label for="defaultconfig-4" class="col-form-label">Keterangan</label>
+                            </div>
+                            <div class="col mb-3">
+                                <textarea id="maxlength-textarea" class="form-control" id="defaultconfig-4" maxlength="100" rows="8" placeholder="This textarea has a limit of 100 chars."></textarea>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label class="form-label">Waktu Absen Masuk:</label>
+                                    <input class="form-control mb-4 mb-md-0" data-inputmask="'alias': 'datetime'" data-inputmask-inputformat="dd/mm/yyyy" />
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
