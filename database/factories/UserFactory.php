@@ -22,7 +22,7 @@ class UserFactory extends Factory
             'username' => fake()->username(),
             'email' => fake()->unique()->safeEmail(),
             'password' => bcrypt('123'), // password
-            'role' => fake()->randomElement(['admin', 'mentor', 'siswa', 'staff', 'instansi']),
+            'role' => fake()->randomElement(['admin', 'mentor', 'siswa', 'staff', 'instansi','pembimbing']),
             'status' => fake()->randomElement(['aktif', 'inaktif'])
         ];
     }

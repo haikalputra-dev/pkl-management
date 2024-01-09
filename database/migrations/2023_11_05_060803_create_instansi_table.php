@@ -19,7 +19,6 @@ return new class extends Migration
             $table->enum('jenis_sekolah',['negeri','swasta'])->default('negeri');
             $table->string('alamat',100);
             $table->string('telepon',20);
-            $table->string('email',50);
         });
     }
 

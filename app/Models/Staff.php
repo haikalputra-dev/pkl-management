@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Staff extends Model
 {
     use HasFactory;
+    public $table = "tim";
     public $timestamps = false;
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('id_pembimbing');
             $table->integer('id_tim');
             $table->integer('id_staff');
+            $table->string('dokumen',100);
             $table->enum('status_pengajuan',['Draft','Diserahkan','Ditunda','Diterima','Ditolak'])->default('Draft');
         });
     }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tim', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_instansi');
             $table->integer('id_pembimbing');
             $table->integer('id_siswa');
         });

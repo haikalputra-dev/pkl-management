@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
-            $table->integer('nis');
             $table->integer('id_auth');
+            $table->integer('id_instansi');
+            $table->integer('nis');
+            $table->string('nama_siswa',50);
             $table->date('tgl_lahir');
             $table->string('alamat',50);
             $table->enum('jenis_kelamin',['pria','wanita']);
             $table->string('agama',50);
-            $table->string('email',50);
             $table->string('no_telp',20);
             $table->string('jurusan',40);
         });

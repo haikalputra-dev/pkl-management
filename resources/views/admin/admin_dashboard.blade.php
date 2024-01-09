@@ -82,14 +82,10 @@
 
     <!-- Custom js for this page -->
     <script src="{{asset('../assets/js/dashboard-dark.js')}}"></script>
-<<<<<<< HEAD
     <script src="{{asset('../assets/js/data-table.js') }}"></script>
     <script src="{{asset('../assets/js/sweet-alert.js')}}"></script>
+    <script src="{{asset('../assets/js/flatpickr.js') }}"></script>
     <!-- End custom js for t    his page -->
-=======
-    <!-- End custom js for this page -->
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
->>>>>>> f09dccf6928e9274a0b90e225b2b7c01749af4f0
 
     <script>
         @if(Session::has('message'))
@@ -113,6 +109,63 @@
         }
         @endif
     </script> -->
+    <script>
+        $(document).ready(function () {
+
+            /*------------------------------------------
+            --------------------------------------------
+            Country Dropdown Change Event
+            --------------------------------------------
+            --------------------------------------------*/
+            $('#instansi-dropdown').on('change', function () {
+  
+                var id_instansi = this.value;
+                $("#pembimbing-dropdown").html('');
+                $.ajax({
+                    url: "{{url('admin/tim/get-pembimbing')}}" +'/'+id_instansi,
+                    type: "GET",    
+                    dataType: 'json',
+                    success: function (result) {
+                        $('#pembimbing-dropdown').html('<option value="">-- Select Pembimbing --</option>');
+                        $.each(result.pembimbing, function (key, value) {
+                            $("#pembimbing-dropdown").append('<option value="' + value
+                                .id + '">' + value.nama_pembimbing + '</option>');
+                        });
+                        $('#siswa-dropdown').html('<option value="">-- Select Siswa --</option>');
+                        $.each(result.siswa, function (key, value) {
+                            $("#siswa-dropdown").append('<option value="' + value
+                                .id + '">' + value.nama_siswa + '</option>');
+                        });
+                    }
+                });
+            });
+            $('#resetDropdown').on('click', function() {
+                $('#siswa-dropdown:not(:first)').remove();
+            });
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+            // Event listener for the "Add Dropdown" button
+            $('#addDropdown').on('click', function() {
+                // Clone the first dropdown container
+                var clonedDropdown = $('#siswa-dropdown:first').clone();
+
+                // Exclude the selected option from the cloned dropdown
+                // var selectedOptionValue = originalDropdown.find('select').val();
+                // clonedDropdown.find('option[value="' + selectedOptionValue + '"]').remove();
+
+                // Append the cloned dropdown to the container
+                $('#siswa-dropdown:last').after(clonedDropdown);
+            });
+    
+            // Event listener for the "Remove Dropdown" button (optional)
+            $(document).on('click', '.removeDropdown', function() {
+                // Remove the clicked dropdown container
+                $(this).closest('#siswa-dropdown').remove();
+            });
+        });
+    </script>
 </body>
 
 </html>

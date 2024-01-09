@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use app\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Alert;
 use App\Models\Post;
 use App\Models\Instansi;
 use Illuminate\Http\Request;
@@ -18,11 +19,6 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    public function crudData()
-    {
-        return view('admin.datamaster.index');
-    }
-
     public function AdminLogout(Request $request)
     {
         Auth::guard('web')->logout();
@@ -33,11 +29,6 @@ class AdminController extends Controller
 
         return redirect('/');
     }
-
-    // public function AdminLogin()
-    // {
-    //     return view('admin.admin_login');
-    // }
 
     public function AdminProfile()
     {
@@ -64,12 +55,6 @@ class AdminController extends Controller
             $data['photo'] = $filename;
         }
         $data->save();
-
-        //gagal notifikasi 
-        // $notification = array(
-        //     'message' => 'Admin profile updated sucsess',
-        //     'alert-type' => 'sucsess'
-        // );
 
         return redirect()->back();
     }
@@ -99,17 +84,30 @@ class AdminController extends Controller
     public function AdminDataMaster()
     {
         $users = DB::table('users')->get();
+        $title = 'Delete Data!';
+        $text = "Yakin Hapus Data?";
+        confirmDelete($title, $text);
         return view(('admin.admin_data_master'), compact('users'));
     }
+
+    function updateStatusAktif($type,$id) 
+    {
+        $user = User::find($id);
+        $user->status   = $type;
+        $user->save();
+        Alert::success('Success!',"Status User Berhasil Diubah!");
+        return back();
+    }
+
     public function AdminCreateData()
     {
-        
         return view(('admin.datamaster.create'),);
     }
     public function AdminDataStore(Request $request)
     {
         User::create($request->all());
-        return redirect()->route('admin.create.data')->withSuccess('create user success');
+        Alert::success('Hore!','Successfully');
+        return redirect()->route('admin.create.data');
     }
     function AdminDeleteUser(Request $request)
     {
@@ -123,49 +121,6 @@ class AdminController extends Controller
         $profileData = User::find($id);
         return view('admin.datamaster.edit', compact('profileData'));
     }
-    public function AdminInstansi()
-    {
-        $instansis = DB::table('instansi')
-            ->join('users', 'users.id', 'instansi.id_auth')
-            ->select('instansi.id', 'users.username', 'users.email', 'instansi.nama_instansi')->get();
 
-        return view('admin.data_master.instansi_master', compact('instansis'));
-    }
-
-    function insertInstansi(Request $request)
-    {
-        $id_user = $request->input('id_user');
-        $nama = $request->input('nama');
-        DB::insert('insert into instansi (id_user, nama_instansi) values (?, ?)', [$id_user, $nama]);
-        return redirect()->route('admin.instansi');
-    }
-
-    function destroyInstansi($id)
-    {
-        DB::delete('delete from instansi where id = ?', [$id]);
-        return redirect()->route('admin.instansi');
-    }
-
-    function editInstansi($id)
-    {
-        $instansi = DB::table('instansi')
-            ->join('users', 'users.id', 'instansi.id_user')
-            ->select('instansi.id', 'instansi.id_user', 'users.username', 'users.email', 'instansi.nama_instansi')
-            ->where('instansi.id', $id)->first();
-        return view('admin.data_master.instansi_edit', compact('instansi'));
-    }
-
-    function updateInstansi($id, Request $request)
-    {
-        $request->validate([
-            'id_user' => 'required',
-            'nama_instansi' => 'required',
-        ]);
-
-        $instansi = Instansi::findOrFail($id);
-        $instansi->update([
-            'nama_instansi' => $request->nama_instansi
-        ]);
-        return redirect()->route('admin.instansi');
-    }
+    
 }

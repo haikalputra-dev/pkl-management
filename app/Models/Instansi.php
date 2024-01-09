@@ -12,7 +12,7 @@ class Instansi extends Model
     public $table = "instansi";
     public $timestamps = false;
     protected $fillable =[
-        'nama_instansi'
+        'nama_instansi','npsn','alamat','telepon','id_auth'
     ];
     
 }

@@ -1,5 +1,6 @@
   @extends('admin.admin_dashboard')
   @section('admin')
+  @include('sweetalert::alert')
 <div class="page-content">
 
   <nav class="page-breadcrumb">
@@ -31,7 +32,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($instansis as $i)  
+                @foreach ($instansi as $i)  
                 <tr>
                   <td>{{ $i->id }}</td>
                   <td>{{ $i->username }}</td>
@@ -89,32 +90,59 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form class="forms-sample" action="{{ route('insertInstansi') }}" method="POST">
+    <form class="forms-sample" action="/admin/instansi" method="POST">
       @csrf
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
       </div>
-      <div class="modal-body">
-        <div class="card">
-          <div class="card-body">
-
-            <h6 class="card-title">Instansi</h6>
-
-            
-              <div class="mb-3">
+      <div class="modal-body">            
+              {{-- <div class="mb-3">
                 <label for="exampleInputUsername1" class="form-label">Username</label>
                 <input type="text" class="form-control" id="exampleInputUsername1" autocomplete="off" placeholder="Username" name="id_user">
+              </div> --}}
+              <div class="mb-3">
+                <label for="exampleFormControlSelect1" class="form-label">Username</label>
+                <select class="form-select" id="exampleFormControlSelect1" name="id_auth">
+                  <option value="" selected disabled>---PILIH USER---</option>
+                  @foreach ($user as $u)
+                  @if(is_null($u->id_auth))
+                  <option value="{{ $u->id }}">{{ $u->username }}</option>
+                  @endif
+                  @endforeach
+                </select>
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Nama Instansi</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" autocomplete="off" placeholder="Nama Instansi" name="nama">
+                <input type="text" class="form-control" id="exampleInputPassword1" autocomplete="off" placeholder="Nama Instansi" name="nama_instansi">
               </div>
-            
-
-          </div>
-        </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">NPSN</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" autocomplete="off" placeholder="NPSN" name="npsn">
+              </div>
+              <div class="mb-3">
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" name="jenis_sekolah" id="radioInline">
+                  <label class="form-check-label" for="radioInline">
+                    Negeri
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" name="jenis_sekolah" id="radioInline1">
+                  <label class="form-check-label" for="radioInline1">
+                    Swasta
+                  </label>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Alamat</label>
+                <textarea class="form-control" name="alamat"id="exampleFormControlTextarea1" rows="5"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Telepon</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" autocomplete="off" placeholder="Telepon" name="telepon">
+              </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

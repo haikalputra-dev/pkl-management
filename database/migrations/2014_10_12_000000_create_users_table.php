@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('username',50)->nullable();
             $table->string('email',50)->unique();
             $table->string('password',150);
-            $table->enum('role', ['admin', 'mentor', 'siswa', 'staff', 'instansi']);
+            $table->enum('role', ['admin', 'mentor', 'siswa', 'staff', 'instansi','pembimbing']);
             $table->enum('status', ['aktif', 'inaktif'])->default('aktif');
         });
     }
