@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengajuan', function (Blueprint $table) {
+        Schema::create('pengajuans', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_tim');
-            $table->integer('id_staff')->nullable();
-            $table->string('dokumen',100);
-            $table->enum('status_pengajuan',['Draft','Diserahkan','Ditunda','Diterima','Ditolak'])->default('Draft');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengajuan');
+        Schema::dropIfExists('pengajuans');
     }
 };
