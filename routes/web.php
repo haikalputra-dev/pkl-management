@@ -84,7 +84,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('admin/siswa', SiswaController::class);
     Route::resource('admin/tim', TimController::class);
     Route::resource('admin/staff', StaffController::class);
-    
+
 });
 
 
@@ -125,6 +125,6 @@ Route::middleware(['auth', 'role:instansi'])->group(function () {
 Route::middleware(['auth', 'role:siswa'])->group(function () {
 
     Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard');
-    Route::post('webcam', [WebcamController::class, 'store'])->name('webcam.capture');
+    
     Route::get('user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
 });
