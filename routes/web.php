@@ -118,13 +118,19 @@ Route::middleware(['auth', 'role:instansi'])->group(function () {
     Route::get('instansi/dashboard', [InstansiController::class, 'InstansiDashboard'])->name('instansi.dashboard');
     Route::get('instansi/logout', [InstansiController::class, 'InstansiLogout'])->name('instansi.logout');
     // Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
-    
+
 
 });
 
 Route::middleware(['auth', 'role:siswa'])->group(function () {
-
     Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard');
+    Route::post('webcam', [UserController::class, 'store'])->name('webcam.capture');
+    Route::get('/presensi', [UserController::class, 'UserPresensi'])->name('user.Presensi');
+    Route::get('/presensis', [UserController::class, 'UserPresensis'])->name('user.Presensis');
 
+    Route::get('/user/jurnal', [UserController::class, 'UserJurnal'])->name('user.jurnal');
+
+    Route::get('/user/materi', [UserController::class, 'UserMateri'])->name('user.materi');
     Route::get('user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
+    Route::post('/presensi/store/', [UserController :: class, 'store']);
 });
