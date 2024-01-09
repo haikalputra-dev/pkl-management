@@ -28,13 +28,13 @@
                 <div class="collapse" id="advancedUI">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="pages/advanced-ui/cropper.html" class="nav-link">Absensi</a>
+                            <a href="{{route('user.Presensis')}}" class="nav-link">Absensi</a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/advanced-ui/owl-carousel.html" class="nav-link">Jurnal</a>
+                            <a href="{{route('user.jurnal')}}" class="nav-link">Jurnal</a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/advanced-ui/owl-carousel.html" class="nav-link">Materi</a>
+                            <a href="{{route('user.materi')}}" class="nav-link">Materi</a>
                         </li>
                     </ul>
                 </div>
