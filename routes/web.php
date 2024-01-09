@@ -117,13 +117,13 @@ Route::middleware(['auth', 'role:instansi'])->group(function () {
     Route::get('instansi/dashboard', [InstansiController::class, 'InstansiDashboard'])->name('instansi.dashboard');
     Route::get('instansi/logout', [InstansiController::class, 'InstansiLogout'])->name('instansi.logout');
     // Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
-    Route::resource('instansi/pengajuan', PengajuanController::class);
     
+
 });
 
 Route::middleware(['auth', 'role:siswa'])->group(function () {
 
     Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard');
-    
+
     Route::get('user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
 });
