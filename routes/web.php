@@ -87,8 +87,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 });
 
-
-
 //mentor
 Route::middleware(['auth', 'role:mentor'])->group(function () {
 
@@ -119,7 +117,8 @@ Route::middleware(['auth', 'role:instansi'])->group(function () {
     Route::get('instansi/dashboard', [InstansiController::class, 'InstansiDashboard'])->name('instansi.dashboard');
     Route::get('instansi/logout', [InstansiController::class, 'InstansiLogout'])->name('instansi.logout');
     // Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
-    Route::resource('instansi', InstansiReController::class);
+    Route::resource('instansi/pengajuan', PengajuanController::class);
+    
 });
 
 Route::middleware(['auth', 'role:siswa'])->group(function () {

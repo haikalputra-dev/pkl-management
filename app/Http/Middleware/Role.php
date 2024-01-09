@@ -17,7 +17,7 @@ class Role
     public function handle(Request $request, Closure $next, $role): Response
     {
         if ($request->user()->role !== $role) {
-            return abort(403, 'Acces forbiden');
+            return abort(403, 'Access forbiden');
         }
         return $next($request);
     }
