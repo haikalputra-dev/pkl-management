@@ -24,34 +24,20 @@
             <table id="dataTableExample" class="table">
                 <thead>
                 <tr>
-                    <th>Nama Pembimbing</th>
-                    <th>Nama Siswa</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
+                  <th>Id</th>
+                  <th>Nama Pembimbing</th>
+                  <th>Nama Siswa</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($pengajuan as $i)
                 <tr>
-                    <td>{{$i->name}}</td>
-                    <td>{{$i->username}}</td>
-                    <td>{{$i->email}}</td>
-                    <td>{{$i->role}}</td>
-                    <td>
-                      @if(($i->status)=='aktif')
-                      <form action="{{ route('admin.editStatus',['type'=> 'inaktif','id'=> $i->id]) }}" method="POST">
-                        @csrf
-                        @method('POST')
-                        <button type="submit" class="badge bg-success">Aktif</button>
-                      </form>
-                      @elseif(($i->status)=='inaktif')
-                      <form action="{{ route('admin.editStatus',['type'=> 'aktif','id'=> $i->id]) }}" method="POST">
-                        @csrf
-                        @method('POST')
-                        <button type="submit" class="badge bg-warning">Inaktif</button>
-                      </form>
-                      @endif
-                    </td>
+                    <td>{{$i->id}}</td>
+                    <td>{{$i->nama_pembimbing}}</td>
+                    <td>{{$i->nama_siswa}}</td>
+                    <td>{{$i->status_pengajuan}}</td>
                     <td>
                       <div class="btn-group" role="group" aria-label="Basic Example">
                         <button type="button" class="btn btn-warning btn-icon user_edit">
@@ -118,7 +104,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
       </div>
       <div class="modal-body">
-
+              <div class="mb-3">
+                <label for="exampleFormControlSelect1" class="form-label">Username</label>
+                <select class="form-select" id="exampleFormControlSelect1" name="id_tim">
+                  <option value="" selected disabled>---PILIH USER---</option>
+                  @foreach ($user as $u)
+                  @if(is_null($u->id_auth))
+                  <option value="{{ $u->id }}">{{ $u->username }}</option>
+                  @endif
+                  @endforeach
+                </select>
+              </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Nama</label>
                 <input type="text" class="form-control" id="exampleInputPassword1" autocomplete="off" placeholder="Nama" name="nama">

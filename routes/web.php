@@ -7,6 +7,7 @@ use App\Http\Controllers\MentorController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\InstansiController;
 use App\Http\Controllers\PembimbingController;
+use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TimController;
 use App\Http\Controllers\InstansiReController;

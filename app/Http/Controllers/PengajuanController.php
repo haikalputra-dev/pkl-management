@@ -7,8 +7,12 @@ use App\Models\Pengajuan;
 use App\Models\Tim;
 use App\Models\Siswa;
 use App\Models\Pembimbing;
+use App\Models\User;
+use App\Models\Instansi;
 use App\Http\Requests\StorePengajuanRequest;
 use App\Http\Requests\UpdatePengajuanRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PengajuanController extends Controller
 {
@@ -17,15 +21,25 @@ class PengajuanController extends Controller
      */
     public function index()
     {
-        $pengajuan = Pengajuan::all();
+        $id = Auth::user()->id;
+        $idInstansi = Instansi::where('id_auth','=',$id)->first();
+        // $pengajuan = Pengajuan::where('id_instansi',$idInstansi->id)->get();
+        $pengajuan = DB::table('pengajuan')
+                    ->select('pengajuan.*','tim.id_pembimbing','tim.id_siswa','pembimbing.nama_pembimbing','siswa.nama_siswa')
+                    ->join('tim','tim.id','=','pengajuan.id_tim')
+                    ->join('pembimbing','pembimbing.id','=','tim.id_pembimbing')
+                    ->join('siswa','siswa.id','=','tim.id_siswa')
+                    ->get();
 
-        $timData = Tim::where();
-
+        $resultPengajuan = [];
+        // foreach ($pengajuan as $p) {
+        //     $timPengajuan = Tim::where('id_instansi',$idInstansi->id)->get();
+        // }
+        $timData = Tim::where('id_instansi','=',$idInstansi->id)->get();
         $resultData = [];
-    
         foreach ($timData as $tim) {
             $idSiswaArray = explode('|', $tim->id_siswa);
-    
+
             $siswaNames = Siswa::whereIn('id', $idSiswaArray)->pluck('nama_siswa')->toArray();
             $instansiNames = Instansi::where('id', $tim->id_instansi)->pluck('nama_instansi')->toArray();
             $pembimbingNames = Pembimbing::where('id', $tim->id_pembimbing)->pluck('nama_pembimbing')->toArray();

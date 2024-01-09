@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-
+use app\Models\User;
 use Illuminate\Http\Request;
 
 class InstansiController extends Controller
 {
     public function InstansiDashboard()
     {
-        return view('instansi.index');
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+        return view('instansi.index',compact('profileData'));
     }
     public function instansiLogout(Request $request)
     {

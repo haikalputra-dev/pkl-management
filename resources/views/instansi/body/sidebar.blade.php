@@ -21,7 +21,7 @@
 
             <li class="nav-item nav-category">Pengajuan</li>
             <li class="nav-item">
-                <a href="{{route('admin.dashboard')}}" class="nav-link">
+                <a href="/instansi/pengajuan" class="nav-link">
                     <i class="link-icon" data-feather="feather"></i>
                     <span class="link-title">Pengajuan</span>
                 </a>
