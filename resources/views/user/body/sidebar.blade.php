@@ -33,6 +33,9 @@
                         <li class="nav-item">
                             <a href="pages/advanced-ui/owl-carousel.html" class="nav-link">Jurnal</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="pages/advanced-ui/owl-carousel.html" class="nav-link">Materi</a>
+                        </li>
                     </ul>
                 </div>
         </ul>

@@ -30,7 +30,11 @@ Route::get('/', function () {
     return view('front/main');
 });
 
-Route::get('send-mail',[MailController::class,'index']);
+
+
+Route::get('send-mail', [MailController::class, 'index']);
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -116,4 +120,11 @@ Route::middleware(['auth', 'role:instansi'])->group(function () {
     Route::get('instansi/logout', [InstansiController::class, 'InstansiLogout'])->name('instansi.logout');
     // Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
     Route::resource('instansi', InstansiReController::class);
+});
+
+Route::middleware(['auth', 'role:siswa'])->group(function () {
+
+    Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard');
+    Route::post('webcam', [WebcamController::class, 'store'])->name('webcam.capture');
+    Route::get('user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
 });
