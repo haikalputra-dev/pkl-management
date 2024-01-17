@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('keterangan', ['Masuk', 'Alpa', 'Telat', 'Sakit',]);
             $table->date('tanggal');
             $table->time('jam_masuk')->nullable();
-            $table->time('jam_keluar')->nullable();
+            $table->string('foto_in',100);
         });
     }
 

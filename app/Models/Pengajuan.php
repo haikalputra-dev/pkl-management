@@ -11,6 +11,6 @@ class Pengajuan extends Model
     public $table = "pengajuan";
     public $timestamps = false;
     protected $fillable =[
-        'nama_pembimbing'
+        'id_instansi','id_tim','id_staff','dokumen'
     ];
 }

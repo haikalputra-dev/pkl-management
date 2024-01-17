@@ -24,4 +24,6 @@ class InstansiController extends Controller
 
         return redirect('/');
     }
+
+
 }

@@ -52,7 +52,7 @@
       </div>
     </div>
   </section>
-
+  @include('sweetalert::alert')
   <!-- ======= Header ======= -->
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
@@ -549,54 +549,50 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              {{-- <div class="row">
-                <div class="col form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Nama Instansi" required>
+            <form action="{{ route('daftarInstansi') }}" method="POST" style="box-shadow: 0 0 30px rgba(214, 215, 216, 0.4);
+            padding: 30px;">
+              @csrf
+              <div class="row">
+                <div class="col form-group" style="margin-bottom: 20px;">
+                  <input type="text" name="username" class="form-control" id="name" placeholder="Username" required style="border-radius: 0; box-shadow: none;font-size: 14px;" >
                 </div>
-                <div class="col form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                <div class="col form-group" style="margin-bottom: 20px;">
+                  <input type="password" name="password" class="form-control" id="name" placeholder="Password" required style="border-radius: 0; box-shadow: none;font-size: 14px;" >
                 </div>
-              </div> --}}
-              <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Nama Instansi" required>
+                <div class="col form-group" style="margin-bottom: 20px;">
+                  <input type="email" name="email" class="form-control" id="name" placeholder="Email" required style="border-radius: 0; box-shadow: none;font-size: 14px;" >
+                </div>
+                <hr>
+                <div class="col form-group" style="margin-bottom: 20px;">
+                  <input type="text" name="nama_instansi" class="form-control" id="name" placeholder="Nama Instansi" required style="border-radius: 0; box-shadow: none;font-size: 14px;" >
+                </div>
+                <div class="col form-group" style="margin-bottom: 20px;">
+                  <input type="text" class="form-control" name="npsn" id="email" placeholder="NPSN" required style="border-radius: 0; box-shadow: none;font-size: 14px;" >
+                </div>
               </div>
-              <div class="form-group">
-                {{-- <label for="exampleDataList" class="form-label">Datalist example</label> --}}
-                  <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-                  <datalist id="datalistOptions">
-                    <option value="San Francisco">
-                    <option value="New York">
-                    <option value="Seattle">
-                    <option value="Los Angeles">
-                    <option value="Chicago">
-                  </datalist>
-              </div>
-              <div class="form-group">
+              <div class="form-group" style="margin-bottom: 20px;">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                  <label class="form-check-label" for="inlineRadio1">1</label>
+                  <input class="form-check-input" type="radio" name="jenis_sekolah" id="inlineRadio1" value="option1">
+                  <label class="form-check-label" for="inlineRadio1">Negeri</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                  <label class="form-check-label" for="inlineRadio2">2</label>
+                  <input class="form-check-input" type="radio" name="jenis_sekolah" id="inlineRadio2" value="option2">
+                  <label class="form-check-label" for="inlineRadio2">Swasta</label>
                 </div>
               </div>
-              <div class="form-group">
-                <textarea class="form-control" name="message" rows="2" placeholder="Message" required></textarea>
+              <div class="form-group" style="margin-bottom: 20px;">
+                <input type="number" class="form-control" name="telepon" id="subject" placeholder="Telepon" required style="border-radius: 0; box-shadow: none;font-size: 14px;" >
               </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Telepon" required>
+              <div class="form-group" style="margin-bottom: 20px;">
+                <textarea class="form-control" name="alamat" rows="4" placeholder="Alamat" required style="border-radius: 0; box-shadow: none; font-size:14px;" ></textarea>
               </div>
-              <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+              <div class="text-center">
+                <button type="submit" style="  background: #106eea;
+                border: 0;
+                padding: 10px 30px;
+                color: #fff;
+                border-radius: 4px;">Daftar</button>
               </div>
-              {{-- <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div> --}}
-              <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
           </div>
 
@@ -606,90 +602,6 @@
     </section><!-- End Contact Section -->
 
   </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-
-    {{-- <div class="footer-newsletter">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-6">
-            <h4>Join Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>BizLand<span>.</span></h3>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
-            </p>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Social Networks</h4>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
-            <div class="social-links mt-3">
-              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div> --}}
-
-    {{-- <div class="container py-4">
-      <div class="copyright">
-        &copy; Copyright <strong><span>BizLand</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bizland-bootstrap-business-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div> --}}
-  </footer><!-- End Footer -->
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

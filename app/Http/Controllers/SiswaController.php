@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Alert;
 use App\Models\Siswa;
 use App\Models\Instansi;
+use App\Models\User;
 use App\Http\Requests\StoreSiswaRequest;
 use App\Http\Requests\UpdateSiswaRequest;
 use Illuminate\Support\Facades\DB;
@@ -22,11 +23,14 @@ class SiswaController extends Controller
                 ->where('users.role','siswa')
                 ->get();
         $siswa   = DB::table('siswa')
-                ->select('siswa.*','users.id','users.username','instansi.nama_instansi','instansi.id')
+                ->select('siswa.*','users.id as id_user','users.username','instansi.nama_instansi','instansi.id as id_instansi')
                 ->join('users','users.id','=','siswa.id_auth')
                 ->join('instansi','instansi.id','=','siswa.id_instansi')
                 ->get();
         $instansi = Instansi::all();
+        $title = 'Delete User!';
+        $text = "Yakin Hapus Data User?";
+        confirmDelete($title, $text);
         return view('admin.data_master.siswa_master', compact('siswa','instansi','user'));
     }
 
@@ -42,8 +46,20 @@ class SiswaController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreSiswaRequest $request)
-    {
-        $id_auth            = $request->input('id_auth');
+    {        
+        $username           = $request->input('username');
+        $password           = $request->input('password');
+        $email              = $request->input('email');
+        $user_id = User::create([
+            'name'          => $request->input('nama_siswa'),
+            'username'      => $username,
+            'email'         => $email,
+            'password'      => bcrypt($password),
+            'role'          => 'siswa',
+            'status'        => 'inaktif' 
+        ]);
+
+        $id_auth            = $user_id -> id;
         $id_instansi        = $request->input('id_instansi');
         $nis                = $request->input('nis');
         $nama_siswa         = $request->input('nama_siswa');
@@ -89,24 +105,31 @@ class SiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSiswaRequest $request, Siswa $siswa)
+    public function update(UpdateSiswaRequest $request)
     {
-        $user = User::find($id);
+        $id = $request->input('id');
+        $siswa = Siswa::find($id);
 
-        $user->name             = $request->input('nama');
-        $user->email            = $request->input('email');
-        $user->status           = $request->input('status_aktif');
-        $user->save();
+        $siswa->nis              = $request->input('nis');
+        $siswa->nama_siswa       = $request->input('nama_siswa');
+        $siswa->tgl_lahir        = $request->input('tgl_lahir');
+        $siswa->jenis_kelamin    = $request->input('jenis_kelamin');
+        $siswa->alamat           = $request->input('alamat');
+        $siswa->agama            = $request->input('agama');
+        $siswa->no_telp          = $request->input('telepon');
+        $siswa->jurusan          = $request->input('jurusan');
+        // dd($siswa);
+        $siswa->save();
+        Alert::success('Success!',"User Berhasil Diupdate!");
         return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Siswa $siswa)
+    public function destroySiswa($id)
     {
-        User::destroy($user->id);
-        // DB::delete('delete from instansi where id = ?', [$id]);
+        Siswa::destroy($id);
         Alert::success('Success!',"User Berhasil Dihapus!");
         return back();
     }

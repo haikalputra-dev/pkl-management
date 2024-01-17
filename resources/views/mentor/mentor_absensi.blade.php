@@ -3,66 +3,14 @@
 
 <div class="page-content">
 
+
     <nav class="page-breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Tables</a></li>
             <li class="breadcrumb-item active" aria-current="page">Data Table</li>
         </ol>
     </nav>
-    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-        <div>
-            <h4 class="mb-3 mb-md-0">Welcome to Absensi</h4>
-        </div>
-        <div class="d-flex align-items-center flex-wrap text-nowrap">
-            <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
-                <span class="input-group-text input-group-addon bg-transparent border-primary" data-toggle><i data-feather="calendar" class="text-primary"></i></span>
-                <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date" data-input>
-            </div>
-
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Buat Absensi
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Buat Absensi</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="exampleInputUsername1" class="form-label">Nama Absensi</label>
-                                <input type="text" name="username" class="form-control" id="exampleInputUsername1" autocomplete="off" value="">
-                            </div>
-
-                            <div class="col">
-                                <label for="defaultconfig-4" class="col-form-label">Keterangan</label>
-                            </div>
-                            <div class="col mb-3">
-                                <textarea id="maxlength-textarea" class="form-control" id="defaultconfig-4" maxlength="100" rows="8" placeholder="This textarea has a limit of 100 chars."></textarea>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label class="form-label">Waktu Absen Masuk:</label>
-                                    <input class="form-control mb-4 mb-md-0" data-inputmask="'alias': 'datetime'" data-inputmask-inputformat="dd/mm/yyyy" />
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    
 
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
@@ -72,39 +20,31 @@
 
                     <div class="table-responsive">
                         <table id="dataTableExample" class="table">
+
                             <thead>
                                 <tr>
+                                    <th>Photo</th>
                                     <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>Jurusan</th>
+                                    <th>Jam Masuk</th>
                                     <th>Tanggal</th>
-                                    <th>Jam_masuk</th>
-                                    <th>Jam_keluar</th>
+                                    <th>Keterangan</th>
                                 </tr>
                             </thead>
+                            @foreach($datapresensi as $p)
+                            @php
+                            $path = Storage::url('public/upload/absensi/'.$p->foto_in);
+                            @endphp
                             <tbody>
-                                @foreach($users as $row)
-                                <tr>
-                                    <td>{{($row->name)}}</td>
-                                    <td>{{($row->address)}}</td>
-                                    <td>{{($row->role)}}</td>
-                                    <td>{{($row->tanggal)}}</td>
-                                    <td>{{($row->jam_masuk)}}</td>
-                                    <td>{{($row->jam_keluar)}}</td>
+                                <th><img src="{{url($path)}}" alt="Foto Absen" width="50"></th>
 
-                                </tr>
-                                <tr>
-                                    <td>Garrett Winters</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>63</td>
-                                    <td>2011/07/25</td>
-                                </tr>
-
-                                @endforeach
-
+                                <th>{{$p->name}}</th>
+                                <th>{{$p->jam_masuk}}</th>
+                                <th>{{$p->tanggal}}</th>
+                                <th>{{$p->keterangan}}</th>
                             </tbody>
+                            @endforeach
                         </table>
+
                     </div>
                 </div>
             </div>
@@ -112,8 +52,6 @@
     </div>
 
 </div>
-
-
 
 
 

@@ -9,10 +9,12 @@ use App\Models\Siswa;
 use App\Models\Pembimbing;
 use App\Models\User;
 use App\Models\Instansi;
+use App\Models\LogPengajuan;
 use App\Http\Requests\StorePengajuanRequest;
 use App\Http\Requests\UpdatePengajuanRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class PengajuanController extends Controller
 {
@@ -51,7 +53,10 @@ class PengajuanController extends Controller
                 'nama_pembimbing' => $pembimbingNames,
             ];
         }
-        return view('instansi.instansi_pengajuan', compact('pengajuan'));
+        $title = 'Delete Pengajuan!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        return view('instansi.instansi_pengajuan', compact('pengajuan','resultData','idInstansi'));
     }
 
     /**
@@ -67,7 +72,20 @@ class PengajuanController extends Controller
      */
     public function store(StorePengajuanRequest $request)
     {
-        //
+        $request->validate([
+            'file' => 'required|mimes:pdf,xlx,csv|max:2048',
+        ]);
+        $fileName = time().'.'.$request->file->extension();  
+       
+        $request->file->move(public_path('upload/dokumen-pengajuan'), $fileName);
+        Pengajuan::create([
+            'id_instansi'       => $request->input('id_instansi'),
+            'id_tim'            => $request->input('id_tim'),
+            'dokumen'           => $fileName,
+            'status_pengajuan'  => 'Diserahkan'
+        ]);
+        Alert::success('Success!',"Pengajuan Berhasil Dibuat!");
+        return back();
     }
 
     /**
@@ -100,5 +118,41 @@ class PengajuanController extends Controller
     public function destroy(Pengajuan $pengajuan)
     {
         //
+    }
+
+    public function destroyPengajuan($id)
+    {
+        Pengajuan::destroy($id);
+        Alert::success('Success!',"User Berhasil Dihapus!");
+        return back();
+    }
+
+    function detailPengajuan($id){
+        $log = DB::table('log_pengajuan')
+        ->select('*')
+        ->where('id_pengajuan',$id)
+        ->get();
+        $pengajuan = Pengajuan::where('id',$id)->first();
+        
+        return view('instansi.detail_pengajuan_instansi',compact('log','pengajuan'));  
+    }
+
+    function updatePengajuan(Request $request,$id)
+    {
+        $ids = Auth::user()->id;
+        $data = User::find($ids);
+        // dd($data->username);
+        LogPengajuan::create([
+            'id_pengajuan'      => $id,
+            'username'          => $data->username,
+            'komentar'          => $request->input('komentar'),           
+            'status_log'        => $request->input('status_pengajuan')
+        ]);
+
+        $pengajuan = Pengajuan::find($id);
+        $pengajuan->status_pengajuan = $request->input('status_pengajuan');
+        $pengajuan->save();
+        Alert::success('Success!',"Komentar Berhasil!");
+        return back();
     }
 }

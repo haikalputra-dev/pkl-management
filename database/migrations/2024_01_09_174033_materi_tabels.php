@@ -14,7 +14,6 @@ return new class extends Migration
             $table->integer('id_mentor');
             $table->text('keterangan');
             $table->string('file_name',100);
-            $table->string('path',100);
         });
     }
 
@@ -23,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('materi');
+        Schema::dropIfExists('materis');
     }
 };

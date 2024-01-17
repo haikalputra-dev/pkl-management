@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Alert;
 use App\Models\Pembimbing;
+use App\Models\User;
 use App\Http\Requests\StorePembimbingRequest;
 use App\Http\Requests\UpdatePembimbingRequest;
 use Illuminate\Support\Facades\DB;
@@ -32,6 +33,9 @@ class PembimbingController extends Controller
                     ->join('instansi','pembimbing.id_instansi','=','instansi.id')
                     ->where('users.role','pembimbing')
                     ->get();
+        $title = 'Delete User!';
+        $text = "Yakin Hapus Data User?";
+        confirmDelete($title, $text);
         return view('admin.data_master.pembimbing_master', compact('pembimbing','instansi','user'));
     }
 
@@ -48,7 +52,19 @@ class PembimbingController extends Controller
      */
     public function store(StorePembimbingRequest $request)
     {
-        $id_auth            = $request->input('id_auth');
+        $username           = $request->input('username');
+        $password           = $request->input('password');
+        $email              = $request->input('email');
+        $user_id = User::create([
+            'name'          => $request->input('nama_pembimbing'),
+            'username'      => $username,
+            'email'         => $email,
+            'password'      => bcrypt($password),
+            'role'          => 'pembimbing',
+            'status'        => 'inaktif' 
+        ]);
+
+        $id_auth            = $user_id -> id;
         $id_instansi        = $request->input('id_instansi');
         $nama_pembimbing    = $request->input('nama_pembimbing');
         $tgl_lahir          = $request->input('tgl_lahir');
@@ -90,24 +106,28 @@ class PembimbingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePembimbingRequest $request, Pembimbing $pembimbing)
+    public function update(UpdatePembimbingRequest $request)
     {
-        $user = User::find($id);
+        $id = $request->input('id');
+        $pembimbing = Pembimbing::find($id);
 
-        $user->name             = $request->input('nama');
-        $user->email            = $request->input('email');
-        $user->status           = $request->input('status_aktif');
-        $user->save();
+        $pembimbing->nama_pembimbing  = $request->input('nama_pembimbing');
+        $pembimbing->tgl_lahir        = $request->input('tgl_lahir');
+        $pembimbing->jenis_kelamin    = $request->input('jenis_kelamin');
+        $pembimbing->alamat           = $request->input('alamat');
+        $pembimbing->agama            = $request->input('agama');
+        $pembimbing->no_telp          = $request->input('telepon');
+        $pembimbing->save();
+        Alert::success('Success!',"User Berhasil Diupdate!");
         return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pembimbing $pembimbing)
+    public function destroyPembimbing($id)
     {
-        User::destroy($user->id);
-        // DB::delete('delete from instansi where id = ?', [$id]);
+        Pembimbing::destroy($id);
         Alert::success('Success!',"User Berhasil Dihapus!");
         return back();
     }

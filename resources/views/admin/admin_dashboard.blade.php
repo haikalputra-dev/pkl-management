@@ -120,7 +120,19 @@
             $('#instansi-dropdown').on('change', function () {
   
                 var id_instansi = this.value;
-                $("#pembimbing-dropdown").html('');
+                // $("#pembimbing-dropdown").html('');
+                // var $originalDropdown = $('#siswa-dropdown1');
+                // var $clonedDropdowns = $('select[id^="siswa-dropdown"]');
+                // var num = $clonedDropdowns.length + 1;
+                // var $clonedDropdown = $originalDropdown.clone().prop('id', 'siswa-dropdown-' + num);
+                // var optionsLeft = 0
+                // optionsLeft = $originalDropdown.find('option').length;
+                // console.log(optionsLeft);
+                // if (optionsLeft > 2 ) {
+                //     $('#cloneSelect').prop('disabled', false);    
+                // }else{
+                //     $('#cloneSelect').prop('disabled', true);    
+                // }
                 $.ajax({
                     url: "{{url('admin/tim/get-pembimbing')}}" +'/'+id_instansi,
                     type: "GET",    
@@ -131,38 +143,57 @@
                             $("#pembimbing-dropdown").append('<option value="' + value
                                 .id + '">' + value.nama_pembimbing + '</option>');
                         });
-                        $('#siswa-dropdown').html('<option value="">-- Select Siswa --</option>');
+                        $('#siswa-dropdown1').html('<option value="">-- Select Siswa --</option>');
                         $.each(result.siswa, function (key, value) {
-                            $("#siswa-dropdown").append('<option value="' + value
+                            $("#siswa-dropdown1").append('<option value="' + value
                                 .id + '">' + value.nama_siswa + '</option>');
                         });
+                        $('select[id^="siswa-dropdown"]').not(':first').remove();
+                        // $('#cloneSelect').prop('disabled', false);
                     }
                 });
             });
-            $('#resetDropdown').on('click', function() {
-                $('#siswa-dropdown:not(:first)').remove();
-            });
+            
         });
       </script>
-      <script>
+    <script>
         $(document).ready(function() {
-            // Event listener for the "Add Dropdown" button
-            $('#addDropdown').on('click', function() {
-                // Clone the first dropdown container
-                var clonedDropdown = $('#siswa-dropdown:first').clone();
+            $('#cloneSelect').click(function() {
+                // var $select = $('select[id^="siswa-dropdown"]:last');
 
-                // Exclude the selected option from the cloned dropdown
-                // var selectedOptionValue = originalDropdown.find('select').val();
-                // clonedDropdown.find('option[value="' + selectedOptionValue + '"]').remove();
+                // var num2 = parseInt($select.prop("id").match(/\d+/g), 10) + 1;
 
-                // Append the cloned dropdown to the container
-                $('#siswa-dropdown:last').after(clonedDropdown);
+                // var $klon2 = $select.clone().prop('id', 'siswa-dropdown' + num2);
+
+                // $select.after($klon2.text('siswa-dropdown' + num2));
+
+                 // get the last SELECT element with ID "siswa-dropdown"
+                var $originalDropdown = $('#siswa-dropdown1');
+                var $clonedDropdowns = $('select[id^="siswa-dropdown"]');
+
+                // Clone it and assign the new ID
+                var num = $clonedDropdowns.length + 1;
+                var $clonedDropdown = $originalDropdown.clone().prop('id', 'siswa-dropdown-' + num);
+
+                // Remove options that have already been selected in other cloned dropdowns
+                $clonedDropdowns.each(function () {
+                    var selectedValue = $(this).val();
+                    $clonedDropdown.find('option[value="' + selectedValue + '"]').remove();
+                });
+
+                // Finally insert $clonedDropdown wherever you want
+                $originalDropdown.after($clonedDropdown);
+
+                  // Check if there are any options left in the original dropdown
+                var optionsLeft = $clonedDropdown.find('option').length > 2;
+
+                // Disable the clone button if there are no options left
+                $('#cloneSelect').prop('disabled', !optionsLeft);
+
             });
-    
-            // Event listener for the "Remove Dropdown" button (optional)
-            $(document).on('click', '.removeDropdown', function() {
-                // Remove the clicked dropdown container
-                $(this).closest('#siswa-dropdown').remove();
+            $('#cloneSelectRemove').click(function() {
+                $('select[id^="siswa-dropdown"]').not(':first').remove();
+                $('#cloneSelect').prop('disabled', false);
             });
         });
     </script>

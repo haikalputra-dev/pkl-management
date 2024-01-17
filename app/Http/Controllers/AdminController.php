@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use Alert;
 use App\Models\Post;
 use App\Models\Instansi;
+use App\Models\LogPengajuan;
+use App\Models\Pengajuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -14,9 +16,54 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+
+    function indexPengajuan() 
+    {
+        $pengajuan = DB::table('pengajuan')
+        ->select('pengajuan.*','tim.id_pembimbing','tim.id_siswa','pembimbing.nama_pembimbing','siswa.nama_siswa')
+        ->join('tim','tim.id','=','pengajuan.id_tim')
+        ->join('pembimbing','pembimbing.id','=','tim.id_pembimbing')
+        ->join('siswa','siswa.id','=','tim.id_siswa')
+        ->get();
+        $title = 'Delete Pengajuan!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        return view('admin.data_master.pengajuan_master', compact('pengajuan'));    
+    }
+
+    function detailPengajuan($id){
+        $log = DB::table('log_pengajuan')
+        ->select('*')
+        ->where('id_pengajuan',$id)
+        ->get();
+        $pengajuan = Pengajuan::where('id',$id)->first();
+        
+        return view('admin.data_master.detail_pengajuan',compact('log','pengajuan'));  
+    }
+
+    function updatePengajuan(Request $request,$id)
+    {
+        $ids = Auth::user()->id;
+        $data = User::find($ids);
+        
+        LogPengajuan::create([
+            'id_pengajuan'      => $id,
+            'username'          => $data->username,
+            'komentar'          => $request->input('komentar'),
+            'status_log'        => $request->input('status_pengajuan')
+        ]);
+
+        $pengajuan = Pengajuan::find($id);
+        $pengajuan->status_pengajuan = $request->input('status_pengajuan');
+        $pengajuan->save();
+        Alert::success('Success!',"Pengajuan Diubah!");
+        return back();
+    }
+
     public function AdminDashboard()
     {
-        return view('admin.index');
+        $user = User::count();
+        return view('admin.index',compact('user'));
     }
 
     public function AdminLogout(Request $request)

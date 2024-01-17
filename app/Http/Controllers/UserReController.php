@@ -15,7 +15,7 @@ class UserReController extends Controller
     {
         $users = User::all();
         $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
+        $text = "Yakin Hapus Data User?";
         confirmDelete($title, $text);
         return view('admin.admin_data_master', compact('users'));
     }
@@ -42,7 +42,7 @@ class UserReController extends Controller
             'name'      => $nama,
             'username'  => $username,
             'email'     => $email,
-            'password'  => $password,
+            'password'  => Hash::make($password),
             'role'      => $role,
             'status'    => 'inaktif' 
         ]);
@@ -75,8 +75,8 @@ class UserReController extends Controller
 
         $user->name             = $request->input('nama');
         $user->email            = $request->input('email');
-        $user->status           = $request->input('status_aktif');
         $user->save();
+        Alert::success('Success!',"User Berhasil Diupdate!");
         return back();
     }
 

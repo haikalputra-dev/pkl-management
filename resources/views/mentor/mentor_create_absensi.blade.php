@@ -1,89 +1,55 @@
-@extends('mentor.mentor_dashboard')
-@section('Mentor')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+@extends('user.user_dashboard')
+@section('user')
+
 <div class="page-content">
 
-    <div class="row profile-body">
-        <!-- left wrapper start -->
+    <nav class="page-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Tables</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+        </ol>
+    </nav>
 
-        <!-- left wrapper end -->
-        <!-- middle wrapper start -->
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Data Table</h6>
 
-        <div class="col-md-8 col-xl-8 middle-wrapper">
-            <div class="row">
-                <div class="card">
-                    <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dataTableExample" class="table">
 
-                        <h6 class="card-title">Buat Absensi</h6>
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Nama</th>
+                                    <th>Jam Masuk</th>
+                                    <th>Tanggal</th>
+                                    <th>Keterangan</th>
+                                </tr>
+                            </thead>
+                            @foreach($datapresensi as $p)
+                            @php
+                            $path = Storage::url('public/upload/absensi/'.$p->foto_in);
+                            @endphp
+                            <tbody>
+                                <th><img src="{{url($path)}}" alt="Foto Absen" width="50"></th>
 
-                        <form method="POST" action="{{route('mentor.create.absensi')}}" class="forms-sample" enctype="multipart/form-data">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="exampleInputUsername1" class="form-label">Nama Absensi</label>
-                                <input type="text" name="username" class="form-control" id="exampleInputUsername1" autocomplete="off" value="{{$absensi->username}}">
-                            </div>
-
-                            <div class="col">
-                                <label for="defaultconfig-4" class="col-form-label">Keterangan</label>
-                            </div>
-                            <div class="col mb-3">
-                                <textarea id="maxlength-textarea" class="form-control" id="defaultconfig-4" maxlength="100" rows="8" placeholder="This textarea has a limit of 100 chars."></textarea>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label class="form-label">Waktu Absen Masuk:</label>
-                                    <input class="form-control mb-4 mb-md-0" data-inputmask="'alias': 'datetime'" data-inputmask-inputformat="dd/mm/yyyy" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Batas Waktu Absen Masuk:</label>
-                                    <input class="form-control" data-inputmask="'alias': 'datetime'" data-inputmask-inputformat="hh:mm tt" />
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label class="form-label">Waktu Absen Pulang:</label>
-                                    <input class="form-control mb-4 mb-md-0" data-inputmask="'alias': 'datetime'" data-inputmask-inputformat="dd/mm/yyyy" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Batas Waktu Absen Pulang:</label>
-                                    <input class="form-control" data-inputmask="'alias': 'datetime'" data-inputmask-inputformat="hh:mm tt" />
-                                </div>
-                            </div>
-
-
-                            <button type="submit" class="btn btn-primary me-2">Simpan </button>
-                            <a href="{{route('mentor.absensi')}}"><button type="button" class="btn btn-danger me-2">Batal </button>
-                            </a>
-                        </form>
+                                <th>{{$p->name}}</th>
+                                <th>{{$p->jam_masuk}}</th>
+                                <th>{{$p->tanggal}}</th>
+                                <th>{{$p->keterangan}}</th>
+                            </tbody>
+                            @endforeach
+                        </table>
 
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-</div>
-<!-- middle wrapper end -->
-<!-- right wrapper start -->
-<!-- right wrapper end -->
-</div>
 
 </div>
-
-<script>
-    $(document).ready(function() {
-        $('#image').change(function(e) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#showImage').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        });
-    });
-</script>
-
 
 
 

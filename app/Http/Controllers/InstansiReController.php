@@ -25,6 +25,9 @@ class InstansiReController extends Controller
                     ->join('users','users.id','=','instansi.id_auth')
                     ->where('users.role','instansi')
                     ->get();
+        $title = 'Delete User!';
+        $text = "Yakin Hapus Data User?";
+        confirmDelete($title, $text);
         return view('admin.data_master.instansi_master', compact('instansi','user'));
     }
 
@@ -40,8 +43,20 @@ class InstansiReController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $id_auth            = $request->input('id_auth');
+    {        
+        $username           = $request->input('username');
+        $password           = $request->input('password');
+        $email              = $request->input('email');
+        $user_id = User::create([
+            'name'          => $request->input('nama_instansi'),
+            'username'      => $username,
+            'email'         => $email,
+            'password'      => bcrypt($password),
+            'role'          => 'instansi',
+            'status'        => 'inaktif' 
+        ]);
+
+        $id_auth            = $user_id -> id;
         $nama_instansi      = $request->input('nama_instansi');
         $npsn               = $request->input('npsn');
         $jenis_sekolah      = $request->input('jenis_sekolah');
@@ -60,12 +75,44 @@ class InstansiReController extends Controller
         return back();
     }
 
+    public function storeDaftar(Request $request)
+    {
+        $username           = $request->input('username');
+        $password           = $request->input('password');
+        $email              = $request->input('email');
+        $user_id = User::create([
+            'name'          => $request->input('nama_instansi'),
+            'username'      => $username,
+            'email'         => $email,
+            'password'      => bcrypt($password),
+            'role'          => 'instansi',
+            'status'        => 'inaktif' 
+        ]);
+
+        $id_auth            = $user_id -> id;
+        $nama_instansi      = $request->input('nama_instansi');
+        $npsn               = $request->input('npsn');
+        $jenis_sekolah      = $request->input('jenis_sekolah');
+        $alamat             = $request->input('alamat');
+        $telepon            = $request->input('telepon');
+        // DB::insert('insert into users (id_user, nama_instansi) values (?, ?)', [$id_user, $nama]);
+        Instansi::create([
+            'nama_instansi'     => $nama_instansi,
+            'npsn'              => $npsn,
+            'jenis_sekolah'     => $jenis_sekolah,
+            'alamat'            => $alamat,
+            'telepon'           => $telepon,
+        ]);
+        Alert::success('Success!',"Pembuatan Akun Diajukan!");
+        return back();
+    }
+
     /**
      * Display the specified resource.
      */
     public function show(Instansi $instansi)
     {
-        //
+    
     }
 
     /**
@@ -79,9 +126,19 @@ class InstansiReController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Instansi $instansi)
+    public function update(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $instansi = Instansi::find($id);
+
+        $instansi->nama_instansi        = $request->input('nama_instansi');
+        $instansi->npsn                 = $request->input('npsn');
+        $instansi->jenis_sekolah        = $request->input('jenis_sekolah');
+        $instansi->alamat               = $request->input('alamat');
+        $instansi->telepon              = $request->input('telepon');
+        $instansi->save();
+        Alert::success('Success!',"User Berhasil Diupdate!");
+        return back();
     }
 
     /**
@@ -90,5 +147,12 @@ class InstansiReController extends Controller
     public function destroy(Instansi $instansi)
     {
         //
+    }
+
+    public function destroyInstansi($id)
+    {
+        Instansi::destroy($id);
+        Alert::success('Success!',"User Berhasil Dihapus!");
+        return back();
     }
 }

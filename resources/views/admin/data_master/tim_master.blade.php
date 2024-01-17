@@ -3,18 +3,11 @@
   @include('sweetalert::alert')
 <div class="page-content">
 
-  <nav class="page-breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Tables</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data Table</li>
-    </ol>
-  </nav>
-
   <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h6 class="card-title">Data Table</h6>
+          <h6 class="card-title">Tim PKL </h6>
           {{-- <p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank"> Official DataTables Documentation </a>for a full list of instructions and other options.</p> --}}
           <button type="button" class="btn btn-primary btn-icon-text mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="btn-icon-prepend" data-feather="plus-circle"></i>
@@ -40,14 +33,32 @@
                   <td>{{ implode(', ', $i['nama_pembimbing']) }}</td>
                   <td>{{ implode(', ', $i['nama_siswa']) }}</td>
                   <td>
-                    <form action="{{ route('deleteInstansi',$i['id']) }}" method="POST">
-                      @csrf
-                      @method('delete')
-                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                      <button type="button" class="btn btn-warning btn-icon user_edit"><a href="{{ route('admin.editInstansi', $i['id']) }}" style="color: black"><i class="btn-icon-prepend" data-feather="edit"></a></i></button>
-                      <button type="submit" class="btn btn-danger btn-icon"><i class="btn-icon-prepend" data-feather="trash-2"></i></button>
-                    </div>
-      </form>
+                    <div class="btn-group" role="group" aria-label="Basic Example">
+                      <button type="button" class="btn btn-warning btn-icon user_edit">
+                        <a href="" id="editInstansi" data-bs-toggle="modal" data-bs-target="#editModal-{{ $i['id'] }}" data-id="{{ $i['id'] }}" style="color: black"><i class="btn-icon-prepend" data-feather="edit"></i></a>
+                      </button>
+                      <a href="{{ route('deleteTim',$i['id']) }}" data-confirm-delete="true" class="btn btn-danger btn-icon"><i class="btn-icon-prepend" data-confirm-delete="true" data-feather="trash-2" ></i></a>
+                      <!-- Modal -->
+                        <div class="modal fade" id="editModal-{{ $i['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <form class="forms-sample" action="/admin/user/{{ $i['id'] }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="tutupEdit">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                              </div>
+                            </div>
+                          </form>
+                          </div>
+                        </div>
                   </td>
                 </tr>
                 @endforeach
@@ -89,10 +100,11 @@
           </div>
           <div class="mb-3">
             <label for="siswa-dropdown" class="form-label">Siswa</label>
-            <select class="form-select" id="siswa-dropdown" name="id_siswa[]">
+            <select class="form-select" id="siswa-dropdown1" name="id_siswa[]">
             </select>
           </div>
-          <button type="button" id="addDropdown">Add Dropdown</button>
+          <button type="button" id="cloneSelect" class="btn btn-info">Tambah Siswa</button>
+          <button type="button" id="cloneSelectRemove" class="btn btn-warning">-</button>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -103,41 +115,4 @@
   </div>
 </div>
 
-{{-- 
-<script>
-   $(document).ready(function() {
-        $('#load_instansi').on('change', function(e) {
-            var instansi_id = e.target.value;
-            if (instansi_id) {
-                $.ajax({
-                    url: "{{ route('getDoctor') }}",
-                    type: "POST",
-                    data: {
-                        instansi_id: instansi_id,
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function(data) {
-                        if (data) {
-                            $('#load_pembimbing').empty();
-                            $('#load_pembimbing').append(
-                                '<option value=""> Select Pembimbing</option>');
-                            $.each(data, function(key, value) {
-                                $('#load_pembimbing').append($(
-                                    "<option/>", {
-                                        value: key,
-                                        text: value
-                                    }));
-
-                            });
-                        } else {
-                            $('#load_instansi').empty();
-                        }
-                    }
-                })
-            } else {
-                $('#load_instansi').empty();
-            }
-        });
-    });
-</script> --}}
 @endsection

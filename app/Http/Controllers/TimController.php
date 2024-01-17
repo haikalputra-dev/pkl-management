@@ -47,6 +47,9 @@ class TimController extends Controller
         $siswa      = Siswa::all();
         $pembimbing = Pembimbing::all();
         $instansi   = Instansi::all();
+        $title = 'Delete Tim!';
+        $text = "Yakin Hapus Data Tim?";
+        confirmDelete($title, $text);
         return view('admin.data_master.tim_master', compact('siswa','instansi','pembimbing','tim','resultData'));
     }
 
@@ -106,6 +109,14 @@ class TimController extends Controller
     public function destroy(Tim $tim)
     {
         //
+    }
+
+    public function destroyTim($id)
+    {
+        // dd($id);
+        Tim::destroy($id);
+        Alert::success('Success!',"Tim Berhasil Dihapus!");
+        return back();
     }
 
     public function getPembimbingSiswa($id)
